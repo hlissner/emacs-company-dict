@@ -1,6 +1,6 @@
 ;;; company-dict.el --- A company backend that simulates ac-source-dictionary
 ;;
-;; Copyright (C) 2015 Henrik Lissn
+;; Copyright (C) 2015 Henrik Lissner
 
 ;; Author: Henrik Lissner <http://github/hlissner>
 ;; Maintainer: Henrik Lissner <henrik@lissner.net>
