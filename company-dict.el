@@ -1,14 +1,14 @@
 ;;; company-dict.el --- A company backend that simulates ac-source-dictionary
 ;;
-;; Copyright (C) 2015 Henrik Lissner
+;; Copyright (C) 2015-16 Henrik Lissner
 
 ;; Author: Henrik Lissner <http://github/hlissner>
 ;; Maintainer: Henrik Lissner <henrik@lissner.net>
 ;; Created: June 21, 2015
-;; Modified: June 21, 2015
-;; Version: 1.0.0
+;; Modified: February 20, 2015
+;; Version: 1.1.0
 ;; Keywords: company dictionary ac-source-dictionary
-;; Homepage: https://github.com/hlissner/company-dict
+;; Homepage: https://github.com/hlissner/emacs-company-dict
 ;; Package-Requires: ((company "0.9.0") (dash "2.10.0"))
 ;;
 ;; This file is not part of GNU Emacs.
@@ -46,9 +46,10 @@
 
 (defun company-dict-init ()
   "Read dict files and populate dictionary."
-  (dolist (file (directory-files company-dict-dir t "^[^.]"))
-    (add-to-list 'company-dict--alist `(,(intern (file-name-nondirectory (directory-file-name file)))
-                                        ,@(split-string (company-dict--read-file file) "\n" nil)))))
+  (when (file-exists-p company-dict-dir)
+    (dolist (file (directory-files company-dict-dir t "^[^.]"))
+      (add-to-list 'company-dict--alist `(,(intern (file-name-nondirectory (directory-file-name file)))
+                                          ,@(split-string (company-dict--read-file file) "\n" nil))))))
 
 ;;;###autoload
 (defun company-dict (command &optional arg &rest ignored)
