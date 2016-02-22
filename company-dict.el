@@ -19,13 +19,16 @@
 
 (defcustom company-dict-dir (concat user-emacs-directory "dict/")
   "Directory to look for dictionary files."
-  :group 'company)
+  :group 'company
+  :type 'directory)
 
-(defcustom company-dict-minor-mode-alist '()
-  "A list of minor modes to look up dictionaries for (if they're active)."
-  :group 'company)
+(defcustom company-dict-minor-mode-list '()
+  "A list of minor modes to be aware of when looking up dictionaries (if they're active)."
+  :group 'company
+  :type '(repeat symbol))
 
-(defvar company-dict-alist '())
+(defvar company-dict-alist '()
+  "A lookup alist that maps major (or minor) modes to lists of completion candidates.")
 
 (defun company-dict--read-file (file-path)
   (decode-coding-string
@@ -41,7 +44,7 @@
     (mapc (lambda (mode)
             (when (and (boundp mode) (symbol-value mode))
               (setq dicts (append dicts (cdr (assq mode company-dict-alist))))))
-          company-dict-minor-mode-alist)
+          company-dict-minor-mode-list)
     dicts))
 
 (defun company-dict--init (mode)
@@ -50,7 +53,7 @@
     (when (and (not (assq mode company-dict-alist))
                (file-exists-p file))
       (add-to-list 'company-dict-alist
-                   `(,mode ,@(split-string (company-dict--read-file file) "\n" nil))))))
+                   (cons mode (split-string (company-dict--read-file file) "\n" nil))))))
 
 ;;;###autoload
 (defun company-dict (command &optional arg &rest ignored)
