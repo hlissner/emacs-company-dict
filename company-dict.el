@@ -32,7 +32,7 @@
    (with-temp-buffer
      (set-buffer-multibyte nil)
      (setq buffer-file-coding-system 'binary)
-     (insert-file-contents-literally path)
+     (insert-file-contents-literally file-path)
      (buffer-substring-no-properties (point-min) (point-max))) 'utf-8))
 
 (defun company-dict--get-relevant-dicts ()
