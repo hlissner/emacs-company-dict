@@ -1,4 +1,4 @@
-;;; company-dict.el --- A company backend that simulates ac-source-dictionary
+;;; company-dict.el --- A backend that emulates ac-source-dictionary
 ;;
 ;; Copyright (C) 2015-16 Henrik Lissner
 
@@ -9,7 +9,7 @@
 ;; Version: 1.2.0
 ;; Keywords: company dictionary ac-source-dictionary
 ;; Homepage: https://github.com/hlissner/emacs-company-dict
-;; Package-Requires: ((company "0.9.0"))
+;; Package-Requires: ((company "0.8.12"))
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
