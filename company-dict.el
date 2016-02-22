@@ -6,7 +6,7 @@
 ;; Maintainer: Henrik Lissner <henrik@lissner.net>
 ;; Created: June 21, 2015
 ;; Modified: February 22, 2016
-;; Version: 1.2.0
+;; Version: 1.2.1
 ;; Keywords: company dictionary ac-source-dictionary
 ;; Homepage: https://github.com/hlissner/emacs-company-dict
 ;; Package-Requires: ((company "0.8.12"))
