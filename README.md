@@ -1,12 +1,13 @@
 # Company Dictionary
 
-Mimics auto-complete-mode's ac-source-dictionary source.
+A simple backend for [company-mode](https://github.com/company-mode/company-mode) that
+emulates `ac-source-dictionary` and vim's dictionary omnicompletion (`C-x C-k`). It's much
+like `company-keywords`, but with lazy-loaded dictionary files.
 
 + It is not meant to replace `company-keywords`.
-+ Dictionary files are lazy loaded.
 + A dictionary is a plaintext file named after the major-mode in which it should be active.
   This file is a newline-delimited list of keywords.
-+ The dictionary file 'all' applies to all modes.
++ The dictionary file `all` applies to all modes.
 
 ## Installation
 
