@@ -32,5 +32,5 @@ like `company-keywords`, but with lazy-loaded dictionary files.
 (company-mode +1)
 ```
 
-Also: add minor modes to `company-dict-minor-mode-alist` if you'd like minor-mode aware
+Also: add minor modes to `company-dict-minor-mode-list` if you'd like minor-mode aware
 dictionaries.
