@@ -1,0 +1,11 @@
+None
+False
+True
+len	[fn]
+str	[fn]
+int	[fn]
+os.path.abspath		[fn]	Return a normalized absolutized version of the pathname path
+os.path.basename    [fn]	Return the base name of pathname path
+os.path.dirname		[fn]	Return the directory name of pathname path
+os.path.exists		[fn]	Return True if path refers to an existing path
+os.path.supports_unicode_filenames	[var]	True if arbitrary Unicode strings can be used as file names
