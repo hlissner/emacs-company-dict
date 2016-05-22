@@ -17,6 +17,7 @@
 
 (require 'company)
 (eval-when-compile (require 'cl-lib))
+(eval-when-compile (require 'subr-x))
 
 (defgroup company-dict nil
   "A backend that mimics ac-source-dictionary, with support for annotations and
@@ -70,7 +71,7 @@ documentation."
   (let ((file (expand-file-name (symbol-name mode) company-dict-dir))
         result)
     (unless (gethash mode company-dict-table)
-      (awhen (company-dict--read-file file)
+      (when (company-dict--read-file file)
         (mapc (lambda (line)
                 (unless (string-empty-p line)
                   (let ((l (split-string (string-trim-right line) "\t" t)))
