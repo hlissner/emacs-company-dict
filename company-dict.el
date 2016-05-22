@@ -6,7 +6,7 @@
 ;; Maintainer: Henrik Lissner <henrik@lissner.net>
 ;; Created: June 21, 2015
 ;; Modified: May 22, 2016
-;; Version: 1.2.3
+;; Version: 1.2.4
 ;; Keywords: company dictionary ac-source-dictionary
 ;; Homepage: https://github.com/hlissner/emacs-company-dict
 ;; Package-Requires: ((company "0.8.12") (cl-lib "0.5"))
@@ -16,8 +16,9 @@
 ;;; Code:
 
 (require 'company)
-(eval-when-compile (require 'cl-lib))
-(eval-when-compile (require 'subr-x))
+(eval-when-compile
+  (require 'cl-lib)
+  (require 'subr-x))
 
 (defgroup company-dict nil
   "A backend that mimics ac-source-dictionary, with support for annotations and
@@ -35,9 +36,21 @@ documentation."
   :group 'company-dict
   :type '(repeat symbol))
 
-(defcustom company-dict-fuzzy nil
+(defcustom company-dict-enable-fuzzy nil
   "Whether to allow fuzzy searching for company-dict."
-  :group 'company-dict)
+  :group 'company-dict
+  :type 'boolean)
+(define-obsolete-variable-alias 'company-dict-fuzzy 'company-dict-enable-fuzzy "v1.2.4")
+
+(defcustom company-dict-enable-yasnippet t
+  "If non-nil, company-dict autocompletions will be expanded like a `yasnippet'
+snippet, but only if yasnippet is loaded and `yas-minor-mode' is enabled in the
+current buffer. Otherwise, company-dict will pretend this is set to nil.
+
+Note: yasnippet is optional and not a dependency of company-dict. You'll have to
+install and enable it yourself."
+  :group 'company-dict
+  :type 'boolean)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -68,9 +81,9 @@ documentation."
 
 (defun company-dict--init (mode)
   "Read dict files and populate dictionary."
-  (let ((file (expand-file-name (symbol-name mode) company-dict-dir))
-        result)
+  (let (file result)
     (unless (gethash mode company-dict-table)
+      (setq file (expand-file-name (symbol-name mode) company-dict-dir))
       (when (company-dict--read-file file)
         (mapc (lambda (line)
                 (unless (string-empty-p line)
@@ -86,6 +99,12 @@ documentation."
 
 (defun company-dict--meta (data)
   (get-text-property 0 :meta data))
+
+(defun company-dict--post-completion (data)
+  (when (and company-dict-enable-yasnippet
+             (featurep 'yasnippet)
+             (bound-and-true-p yas-minor-mode))
+    (yas-expand-snippet data (- (point) (length data)) (point))))
 
 ;;;###autoload
 (defun company-dict-refresh ()
@@ -103,20 +122,19 @@ loaded."
   (mapc 'company-dict--init (company-dict--relevant-modes))
   (let ((dicts (company-dict--relevant-dicts)))
     (cl-case command
-      (interactive (company-begin-backend 'company-dict))
-      (prefix (and dicts
-                   (company-grab-symbol)))
-      (candidates
-       (remove-if-not
-        (if company-dict-fuzzy
-            (lambda (c) (cl-subsetp (string-to-list arg)
-                               (string-to-list c)))
-          (lambda (c) (string-prefix-p arg c)))
-        dicts))
-      (annotation (company-dict--annotation arg))
-      (meta (company-dict--meta arg))
-      (sorted nil)
-      (no-cache 't))))
+      (interactive     (company-begin-backend 'company-dict))
+      (prefix          (and dicts (company-grab-symbol)))
+      (candidates      (remove-if-not
+                        (if company-dict-enable-fuzzy
+                            (lambda (c) (cl-subsetp (string-to-list arg)
+                                               (string-to-list c)))
+                          (lambda (c) (string-prefix-p arg c)))
+                        dicts))
+      (annotation      (company-dict--annotation arg))
+      (meta            (company-dict--meta arg))
+      (post-completion (company-dict--post-completion arg))
+      (sorted          't)
+      (no-cache        't))))
 
 (provide 'company-dict)
 ;;; company-dict.el ends here

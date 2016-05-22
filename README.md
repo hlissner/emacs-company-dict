@@ -4,18 +4,20 @@
 
 # Company Dictionary
 
-This simple [company](https://github.com/company-mode/company-mode) backend
-emulates `ac-source-dictionary` and vim's dictionary omnicompletion (`C-x C-k`).
-It's much like `company-keywords`, but with lazy-loaded dictionary files, and
-support for annotations and documentation.
+This simple [company] backend emulates `ac-source-dictionary` and vim's
+dictionary omnicompletion (`C-x C-k`). It's much like `company-keywords`, but
+with lazy-loaded dictionary files, and support for annotations and
+documentation.
 
 + It is not meant to replace `company-keywords`.
 + A dictionary is a plaintext file named after the major-mode in which it should
   be active.
 + The dictionary file `all` applies to all modes.
 + This file is a newline-delimited list of keywords.
-+ Each keyword is tab-delimited in the following format: `[keyword]	[[annotation]	[documentation]]`
-  + e.g. `os.path.basename	[function]	Return a normalized absolutized version of the pathname path`
++ Each keyword is tab-delimited in the following format: `[keyword]
+  [[annotation] [documentation]]`
+  + e.g. `os.path.basename [function] Return a normalized absolutized version of
+    the pathname path`
   + ![Screenshot](../screenshots/delimited.png)
   + **NOTE:** the parser squashes multiple tab characters, so use as many tabs
     as you'd like to organize your dictionary files.
@@ -43,6 +45,25 @@ support for annotations and documentation.
 Add minor mode symbols to `company-dict-minor-mode-list` to make company-dict
 aware of minor mode dictionaries.
 
-## TODO
+### Yasnippet integration
 
-+ Add yasnippet support
+`company-dict` autocompletions are automatically expanded like they're
+[yasnippet] snippets **if yasnippet is installed and `yas-minor-mode` is
+enabled in the current buffer**.
+
+Yasnippet is not a dependency of company-dict, so you must install and enable it
+yourself. Which can be done through MELPA: `M-x package-install RET yasnippet`
+
+To disable this behavior, set `company-dict-enable-yasnippet` to `nil`
+
+## Configuration
+
++ `company-dict-minor-mode-alist`
++ `company-dict-dir`
++ `company-dict-minor-mode-alist`
++ `company-dict-enable-fuzzy`
++ `company-dict-enable-yasnippet`
+
+
+[company]: (https://github.com/company-mode/company-mode)
+[yasnippet]: https://github.com/joaotavora/yasnippet
