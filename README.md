@@ -1,3 +1,7 @@
+[![MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
+[![MELPA](http://melpa.org/packages/company-dict-badge.svg)](http://melpa.org/#/company-dict)
+[![MELPA Stable](http://stable.melpa.org/packages/company-dict-badge.svg)](http://stable.melpa.org/#/company-dict)
+
 # Company Dictionary
 
 A simple backend for [company-mode](https://github.com/company-mode/company-mode) that
