@@ -20,6 +20,10 @@
   (require 'cl-lib)
   (require 'subr-x))
 
+;; For compiler
+(defvar yas-minor-mode)
+(declare-function yas-expand-snippet "yasnippet")
+
 (defgroup company-dict nil
   "A backend that mimics ac-source-dictionary, with support for annotations and
 documentation."
