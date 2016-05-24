@@ -71,7 +71,7 @@ install and enable it yourself."
        (buffer-substring-no-properties (point-min) (point-max))) 'utf-8)))
 
 (defun company-dict--relevant-modes ()
-  (append `(all ,major-mode) company-dict-minor-mode-list))
+  (append '(all) (parent-mode-list major-mode) company-dict-minor-mode-list))
 
 (defun company-dict--relevant-dicts ()
   "Merge all dicts together into one large list."
