@@ -128,7 +128,7 @@ loaded."
     (cl-case command
       (interactive     (company-begin-backend 'company-dict))
       (prefix          (and dicts (company-grab-symbol)))
-      (candidates      (remove-if-not
+      (candidates      (cl-remove-if-not
                         (if company-dict-enable-fuzzy
                             (lambda (c) (cl-subsetp (string-to-list arg)
                                                (string-to-list c)))
