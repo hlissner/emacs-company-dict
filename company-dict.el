@@ -20,7 +20,7 @@
   (require 'cl-lib)
   (require 'subr-x))
 
-(autoload "parent-mode-list" "parent-mode")
+(autoload 'parent-mode-list "parent-mode")
 
 ;; For compiler
 (defvar yas-minor-mode)
