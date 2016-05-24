@@ -9,7 +9,7 @@
 ;; Version: 1.2.5
 ;; Keywords: company dictionary ac-source-dictionary
 ;; Homepage: https://github.com/hlissner/emacs-company-dict
-;; Package-Requires: ((company "0.8.12") (cl-lib "0.5"))
+;; Package-Requires: ((company "0.8.12") (cl-lib "0.5") (parent-mode "2.3"))
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
@@ -19,6 +19,8 @@
 (eval-when-compile
   (require 'cl-lib)
   (require 'subr-x))
+
+(autoload "parent-mode-list" "parent-mode")
 
 ;; For compiler
 (defvar yas-minor-mode)
