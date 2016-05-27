@@ -65,10 +65,12 @@ install and enable it yourself."
 
 (defun company-dict--read-file (file-path)
   (when (file-exists-p file-path)
+    (unless (file-readable-p file-path)
+      (user-error "Dictionary file isn't readable! (%s)" file-path))
     (decode-coding-string
      (with-temp-buffer
        (set-buffer-multibyte nil)
-       (setq buffer-file-coding-system 'binary)
+       (setq buffer-file-coding-system 'utf-8)
        (insert-file-contents-literally file-path)
        (buffer-substring-no-properties (point-min) (point-max))) 'utf-8)))
 
@@ -87,16 +89,18 @@ install and enable it yourself."
 
 (defun company-dict--init (mode)
   "Read dict files and populate dictionary."
-  (let (file result)
+  (let (file contents result)
+    (unless (symbolp mode)
+      (error "Expected symbol, got %s" mode))
     (unless (gethash mode company-dict-table)
-      (setq file (expand-file-name (symbol-name mode) company-dict-dir))
-      (when (company-dict--read-file file)
+      (setq file (expand-file-name (symbol-name mode) company-dict-dir)
+            contents (company-dict--read-file file))
+      (when (stringp contents)
         (mapc (lambda (line)
-                (unless (string-empty-p line)
-                  (let ((l (split-string (string-trim-right line) "\t" t)))
-                    (push (propertize (nth 0 l) :note (nth 1 l) :meta (nth 2 l))
-                          result))))
-              (split-string (company-dict--read-file file) "\n" nil))
+                (let ((l (split-string (string-trim-right line) "\t" t)))
+                  (push (propertize (nth 0 l) :note (nth 1 l) :meta (nth 2 l))
+                        result)))
+              (split-string contents "\n" t))
         (puthash mode result company-dict-table)))
     result))
 
