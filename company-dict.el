@@ -9,7 +9,7 @@
 ;; Version: 1.2.7
 ;; Keywords: company dictionary ac-source-dictionary
 ;; Homepage: https://github.com/hlissner/emacs-company-dict
-;; Package-Requires: ((company "0.8.12") (cl-lib "0.5") (parent-mode "2.3"))
+;; Package-Requires: ((emacs "24.4") (company "0.8.12") (parent-mode "2.3"))
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
