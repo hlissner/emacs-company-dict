@@ -16,8 +16,7 @@ documentation.
 + This file is a newline-delimited list of keywords.
 + Each keyword is tab-delimited in the following format: `[keyword]
   [[annotation] [documentation]]`
-  + e.g. `os.path.basename [function] Return a normalized absolutized version of
-    the pathname path`
+  + e.g. `os.path.basename [function] Return the base name of pathname path`
   + ![Screenshot](../screenshots/delimited.png)
   + **NOTE:** the parser squashes multiple tab characters, so use as many tabs
     as you'd like to organize your dictionary files.
