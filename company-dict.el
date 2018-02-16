@@ -110,6 +110,9 @@ install and enable it yourself."
 (defun company-dict--meta (data)
   (get-text-property 0 :meta data))
 
+(defun company-dict--quickhelp-string (data)
+  (get-text-property 0 :meta data))
+
 (defun company-dict--post-completion (data)
   (when (and company-dict-enable-yasnippet
              (featurep 'yasnippet)
@@ -142,6 +145,7 @@ loaded."
                         dicts))
       (annotation      (company-dict--annotation arg))
       (meta            (company-dict--meta arg))
+      (quickhelp-string (company-dict--quickhelp-string arg))
       (post-completion (company-dict--post-completion arg))
       (sorted          't)
       (no-cache        't))))
