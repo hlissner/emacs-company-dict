@@ -79,8 +79,8 @@ install and enable it yourself."
 
 (defun company-dict--relevant-dicts ()
   "Merge all dicts together into one large list."
-  (let ((dicts (append (gethash 'all company-dict-table)
-                       (gethash major-mode company-dict-table))))
+  (let ((dicts (append (gethash major-mode company-dict-table)
+                       (gethash 'all company-dict-table))))
     (mapc (lambda (mode)
             (when (and (boundp mode) (symbol-value mode))
               (setq dicts (append dicts (gethash mode company-dict-table)))))
