@@ -9,7 +9,7 @@ dictionary omnicompletion (`C-x C-k`). It's much like `company-keywords`, but
 with lazy-loaded dictionary files, and support for annotations and
 documentation.
 
-+ It is not meant to replace `company-keywords`.
++ It is meant as an alternative to `company-keywords`.
 + A dictionary is a plaintext file named after the major-mode in which it should
   be active.
 + The dictionary file `all` applies to all modes.
@@ -64,5 +64,5 @@ To disable this behavior, set `company-dict-enable-yasnippet` to `nil`
 + `company-dict-enable-yasnippet`
 
 
-[company]: (https://github.com/company-mode/company-mode)
+[company]: https://github.com/company-mode/company-mode
 [yasnippet]: https://github.com/joaotavora/yasnippet
